@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8fdc7fd26d6a304a90acef7c3649052, type: 3}
+  m_Name: Weapon
+  m_EditorClassIdentifier: 
+  itemId: 5e08eebc-df46-4699-bda6-57fbbbb336fc
+  _sprite: {fileID: 0}
+  _name: test-1
+  _itemLevel: 1
+  _reloadTime: 5
+  _timeBeetwenShoot: 1
+  _damage: 1
+  _ammoInStock: 10
