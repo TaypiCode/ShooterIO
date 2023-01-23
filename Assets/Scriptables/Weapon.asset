@@ -17,6 +17,6 @@ MonoBehaviour:
   _name: test-1
   _itemLevel: 1
   _reloadTime: 5
-  _timeBeetwenShoot: 1
+  _timeBeetwenShoot: 0.5
   _damage: 1
   _ammoInStock: 10
