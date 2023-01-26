@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class PlayerShoot : MonoBehaviour
 {
+    [SerializeField] private PlayerData _playerData;
     [SerializeField] private Weapon _weapon;
     [SerializeField] private WeaponScriptable _weaponData;
-    private bool _isAlive = true;
     private void Start()
     {
-        _weapon.SetData(_weaponData);
+        _weapon.SetData(_weaponData, _playerData.Stat);
     }
     private void Update()
     {
-        if (_isAlive)
+        if (_playerData.IsAlive)
         {
             if (Input.GetMouseButton(0))
             {
@@ -21,12 +21,5 @@ public class PlayerShoot : MonoBehaviour
             }
         }
     }
-    public void OnRespawn()
-    {
-        _isAlive = true;
-    }
-    public void OnDead()
-    {
-        _isAlive = false;
-    }
+    
 }

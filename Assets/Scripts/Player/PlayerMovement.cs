@@ -5,6 +5,7 @@ using UnityEngine.UIElements;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private PlayerData _playerData;
     [SerializeField] private SpawnManager _spawnManager;
     [SerializeField] private Transform _povCameraTransform;
     [Header("Movement")]
@@ -16,30 +17,30 @@ public class PlayerMovement : MonoBehaviour
     private Transform _transform;
     private Vector3 _moveDirection;
     private bool _haveUIForCloseWhenMove = false;
-    private bool _isAlive = true;
 
     private void Start()
     {
         _transform = transform;
-        OnRespawn();
     }
     private void Update()
     {
-        if (_isAlive)
+        if (_playerData.IsAlive)
         {
             DefaultMovement();
         }
     }
     private void FixedUpdate()
     {
-        if (_isAlive)
+        if (_playerData.IsAlive)
         {
             _controller.Move(_moveDirection * Time.deltaTime);
             _transform.rotation = Quaternion.Euler(0, _povCameraTransform.eulerAngles.y, 0);
         }
     }
-
-
+    public void SetRandomSpawnPosition()
+    {
+        _controller.Move(_spawnManager.GetRandomPosition());
+    }
     private void DefaultMovement()
     {
         if (_controller.isGrounded)
@@ -90,14 +91,5 @@ public class PlayerMovement : MonoBehaviour
     private void CloseOpenedUI()
     {
         // action
-    }
-    public void OnRespawn()
-    {
-        _controller.Move(_spawnManager.GetRandomPosition());
-        _isAlive = true;
-    }
-    public void OnDead()
-    {
-        _isAlive = false;
     }
 }

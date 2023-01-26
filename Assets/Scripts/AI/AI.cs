@@ -6,6 +6,7 @@ using UnityEngine.Events;
 
 public class AI : MonoBehaviour
 {
+    [SerializeField] private BattleObjectStat _stat;
     [SerializeField] private float _targetRange;
     [SerializeField] private Destroyable _destroyable;
     [SerializeField] private NavMeshAgent _agent;
@@ -19,12 +20,15 @@ public class AI : MonoBehaviour
     private Destroyable _target = null;
     private UnityEvent OnDeadEvent = new UnityEvent();
     private UnityEvent OnRespawnEvent = new UnityEvent();
+
+    public BattleObjectStat Stat { get => _stat;  }
+
     private void Start()
     {
         _transform = transform;
         _aiManager = FindObjectOfType<AIManager>();
         _aiManager.AddDestroyable(_destroyable);
-        _weapon.SetData(_weaponData);
+        _weapon.SetData(_weaponData, _stat);
         OnDeadEvent.AddListener(OnDead);
         _destroyable.SetDeadAction(OnDeadEvent);
         OnRespawnEvent.AddListener(_destroyable.OnRespawn);

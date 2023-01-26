@@ -2,29 +2,44 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.Events;
 
 public class Weapon : MonoBehaviour
 {
     [SerializeField] private Transform _rayStartTransform;
     [SerializeField] private Transform _bulletStartTransform;
     private WeaponScriptable _weaponData;
-    private float _reloadTimer;
-    private float _timerBetweenShots;
     private int _ammo;
+    private Timer _reloadTimer;
+    private Timer _timerBetweenShots;
+    public FloatUnityEvent OnChangeAmmoEvent;
+    private BattleObjectStat _stat;
+
+    public int Ammo { get => _ammo;
+        private set 
+        {
+            _ammo = value;
+            OnChangeAmmoEvent?.Invoke(_ammo);
+        }
+    }
+
     private void Start()
     {
-        _reloadTimer = 0;
-        _timerBetweenShots = 0;
+        _reloadTimer = this.gameObject.AddComponent<Timer>();
+        _timerBetweenShots = this.gameObject.AddComponent<Timer>(); 
     }
-    private void FixedUpdate()
+    private void Update()
     {
-        _reloadTimer -=  Time.deltaTime;
-        _timerBetweenShots -= Time.deltaTime;
+        if(_ammo <= 0 && _reloadTimer.GetTime() < 0)
+        {
+            Ammo = _weaponData.AmmoInStock; // test
+        }
     }
-    public void SetData(WeaponScriptable data)
+    public void SetData(WeaponScriptable data, BattleObjectStat stat)
     {
         _weaponData = data;
-        _ammo = _weaponData.AmmoInStock;
+        Ammo = _weaponData.AmmoInStock;
+        _stat = stat;
     }
     public void TryShoot()
     {
@@ -32,10 +47,6 @@ public class Weapon : MonoBehaviour
         {
             Shoot();
             CheckCollision();
-            if(_ammo <= 0)
-            {
-                ReloadWeapon();
-            }
         }
     }
     private bool CanShoot()
@@ -44,7 +55,7 @@ public class Weapon : MonoBehaviour
         {
             return false;
         }
-        if (_reloadTimer < 0 && _timerBetweenShots < 0 && _ammo > 0)
+        if (_reloadTimer.GetTime() < 0 && _timerBetweenShots.GetTime() < 0 && _ammo > 0)
         {
             return true;
         }
@@ -52,13 +63,17 @@ public class Weapon : MonoBehaviour
     }
     private void Shoot()
     {
-        _ammo -= 1;
-        _timerBetweenShots = _weaponData.TimeBeetwenShoot;
+        Ammo -= 1;
+        _timerBetweenShots.SetTimer(_weaponData.TimeBeetwenShoot);
+        if (_ammo <= 0)
+        {
+            ReloadWeapon();
+        }
     }
     private void ReloadWeapon()
     {
-        _reloadTimer = _weaponData.ReloadTime;
-        _ammo = _weaponData.AmmoInStock; // test
+        Ammo = 0;
+        _reloadTimer.SetTimer(_weaponData.ReloadTime);
     }
     private void CheckCollision()
     {
@@ -69,7 +84,7 @@ public class Weapon : MonoBehaviour
             Destroyable destroyable;
             if(destroyable = hit.collider.GetComponent<Destroyable>())
             {
-                destroyable.GetDamage(_weaponData.Damage);
+                destroyable.GetDamage(_weaponData.Damage, _stat);
             }
         }
     }
