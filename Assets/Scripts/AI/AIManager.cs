@@ -13,12 +13,15 @@ public class AIManager : MonoBehaviour
     }
     public Destroyable GetNearEnemy(Destroyable from)
     {
-        Destroyable[] arr = destroyables.Where(x => (x.HP > 0) && (x != from)).OrderBy(y => Vector3.Distance(y.GetTransform.position, from.GetTransform.position)).ToArray();
-        if (arr.Length > 0)
+        try
         {
-            return arr[0];
-        }
-        else return null;
+            Destroyable[] arr = destroyables.Where(x => (x.HP > 0) && (x != from)).OrderBy(y => Vector3.Distance(y.GetTransform.position, from.GetTransform.position)).ToArray();
+            if (arr.Length > 0)
+            {
+                return arr[0];
+            }
+            else return null;
+        } catch { return null; };
     }
     public void AddDestroyable(Destroyable obj)
     {
