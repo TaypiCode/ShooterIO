@@ -20,7 +20,7 @@ public class SaveGame : MonoBehaviour
 
     public void SaveProgress()
     {
-        save.example = 1;
+        save.playerScore =  GameData.PlayerScore;
         PlayerPrefs.SetString("SV", JsonUtility.ToJson(save));
         PlayerPrefs.Save();
     }
@@ -28,5 +28,5 @@ public class SaveGame : MonoBehaviour
 [Serializable]
 public class Save
 {
-    public int example;
+    public float playerScore;
 }

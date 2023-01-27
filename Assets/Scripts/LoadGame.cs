@@ -11,7 +11,7 @@ public class LoadGame : MonoBehaviour
         if (PlayerPrefs.HasKey("SV"))
         {
             _save = JsonUtility.FromJson<Save>(PlayerPrefs.GetString("SV"));
-            int example = _save.example;
+            GameData.PlayerScore = _save.playerScore;
         }
     }
 }

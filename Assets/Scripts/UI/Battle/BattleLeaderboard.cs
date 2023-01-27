@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class BattleLeaderboard : MonoBehaviour
 {
+    [SerializeField] private float[] _scoreByPos = new float[3];
     [SerializeField] private GameObject _leaderboardCanvas;
     [SerializeField] private Transform _contentTransform;
     [SerializeField] private GameObject _leaderboardObjPrefub;
@@ -33,5 +34,24 @@ public class BattleLeaderboard : MonoBehaviour
     public void CloseLeaderboard()
     {
         _leaderboardCanvas.SetActive(false);
+    }
+    public int GetPosition(BattleObjectStat obj)
+    {
+        if (_stats == null)
+        {
+            _stats = FindObjectsOfType<BattleObjectStat>().ToList();
+        }
+        _stats = _stats.OrderByDescending(x => x.KillCount).ToList();
+        return _stats.IndexOf(obj) + 1;
+    }
+    public float GetScore(BattleObjectStat obj)
+    {
+        int index = GetPosition(obj) - 1;
+        float score = 0;
+        if (index < _scoreByPos.Length)
+        {
+            score = _scoreByPos[index];
+        }
+        return score;
     }
 }

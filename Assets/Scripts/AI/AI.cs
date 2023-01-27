@@ -36,35 +36,38 @@ public class AI : MonoBehaviour
     }
     private void Update()
     {
-        if (_isAlive)
+        if (GameData.GameEnded == false)
         {
-            if (_target != null)
+            if (_isAlive)
             {
-                if (_target.HP > 0)
+                if (_target != null)
                 {
-                    if (Vector3.Distance(_bodyTranform.position, _target.GetTransform.position) <= _targetRange)
+                    if (_target.HP > 0)
                     {
-                        FindTarget();
-                    }
-                    LookAtTarget();
-                    if (AimedOnTarget())
-                    {
-                        _agent.isStopped=true;
-                        _weapon.TryShoot();
+                        if (Vector3.Distance(_bodyTranform.position, _target.GetTransform.position) <= _targetRange)
+                        {
+                            FindTarget();
+                        }
+                        LookAtTarget();
+                        if (AimedOnTarget())
+                        {
+                            _agent.isStopped = true;
+                            _weapon.TryShoot();
+                        }
+                        else
+                        {
+                            MoveToTarget();
+                        }
                     }
                     else
                     {
-                        MoveToTarget();
+                        FindTarget();
                     }
                 }
                 else
                 {
                     FindTarget();
                 }
-            }
-            else
-            {
-                FindTarget();
             }
         }
     }

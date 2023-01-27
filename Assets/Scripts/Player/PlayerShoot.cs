@@ -13,11 +13,14 @@ public class PlayerShoot : MonoBehaviour
     }
     private void Update()
     {
-        if (_playerData.IsAlive)
+        if (GameData.GameEnded == false)
         {
-            if (Input.GetMouseButton(0))
+            if (_playerData.IsAlive)
             {
-                _weapon.TryShoot();
+                if (Input.GetMouseButton(0))
+                {
+                    _weapon.TryShoot();
+                }
             }
         }
     }

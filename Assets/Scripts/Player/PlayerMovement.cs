@@ -24,17 +24,23 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Update()
     {
-        if (_playerData.IsAlive)
+        if (GameData.GameEnded == false)
         {
-            DefaultMovement();
+            if (_playerData.IsAlive)
+            {
+                DefaultMovement();
+            }
         }
     }
     private void FixedUpdate()
     {
-        if (_playerData.IsAlive)
+        if (GameData.GameEnded == false)
         {
-            _controller.Move(_moveDirection * Time.deltaTime);
-            _transform.rotation = Quaternion.Euler(0, _povCameraTransform.eulerAngles.y, 0);
+            if (_playerData.IsAlive)
+            {
+                _controller.Move(_moveDirection * Time.deltaTime);
+                _transform.rotation = Quaternion.Euler(0, _povCameraTransform.eulerAngles.y, 0);
+            }
         }
     }
     public void SetRandomSpawnPosition()
