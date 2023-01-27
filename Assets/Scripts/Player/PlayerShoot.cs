@@ -21,6 +21,10 @@ public class PlayerShoot : MonoBehaviour
                 {
                     _weapon.TryShoot();
                 }
+                if (Input.GetKeyDown(KeyCode.R))
+                {
+                    _weapon.ReloadWeapon();
+                }
             }
         }
     }

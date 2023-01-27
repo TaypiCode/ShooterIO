@@ -8,6 +8,7 @@ public class Weapon : MonoBehaviour
 {
     [SerializeField] private Transform _rayStartTransform;
     [SerializeField] private Transform _bulletStartTransform;
+    [SerializeField] private Animator _animator;
     private WeaponScriptable _weaponData;
     private int _ammo;
     private Timer _reloadTimer;
@@ -63,6 +64,7 @@ public class Weapon : MonoBehaviour
     }
     private void Shoot()
     {
+        _animator?.SetTrigger("Shoot");
         Ammo -= 1;
         _timerBetweenShots.SetTimer(_weaponData.TimeBeetwenShoot);
         if (_ammo <= 0)
@@ -70,8 +72,9 @@ public class Weapon : MonoBehaviour
             ReloadWeapon();
         }
     }
-    private void ReloadWeapon()
+    public void ReloadWeapon()
     {
+        _animator?.SetTrigger("Reload");
         Ammo = 0;
         _reloadTimer.SetTimer(_weaponData.ReloadTime);
     }

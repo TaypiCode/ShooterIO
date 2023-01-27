@@ -16,7 +16,7 @@ MonoBehaviour:
   _sprite: {fileID: 0}
   _name: test-1
   _itemLevel: 1
-  _reloadTime: 5
-  _timeBeetwenShoot: 0.5
+  _reloadTime: 3.5
+  _timeBeetwenShoot: 0.25
   _damage: 1
-  _ammoInStock: 10
+  _ammoInStock: 30
