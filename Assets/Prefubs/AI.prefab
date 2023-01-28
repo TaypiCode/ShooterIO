@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _startHP: 5
-  _invulnerableTime: 3
+  _invulnerableTime: 1
   OnGetDamageEvent:
     m_PersistentCalls:
       m_Calls:

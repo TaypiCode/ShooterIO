@@ -45,7 +45,9 @@ public class PlayerMovement : MonoBehaviour
     }
     public void SetRandomSpawnPosition()
     {
-        _controller.Move(_spawnManager.GetRandomPosition());
+        _controller.enabled = false;
+        _transform.position= _spawnManager.GetRandomPosition();
+        _controller.enabled = true;
     }
     private void DefaultMovement()
     {
