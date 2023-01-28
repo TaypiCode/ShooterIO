@@ -9,7 +9,7 @@ public class PlayerShoot : MonoBehaviour
     [SerializeField] private WeaponScriptable _weaponData;
     private void Start()
     {
-        _weapon.SetData(_weaponData, _playerData.Stat);
+        ReSetWeapon();
     }
     private void Update()
     {
@@ -28,5 +28,8 @@ public class PlayerShoot : MonoBehaviour
             }
         }
     }
-    
+    public void ReSetWeapon()
+    {
+        _weapon.SetData(_weaponData, _playerData.Stat);
+    }
 }

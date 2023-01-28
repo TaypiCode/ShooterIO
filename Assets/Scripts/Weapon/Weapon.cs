@@ -9,6 +9,8 @@ public class Weapon : MonoBehaviour
     [SerializeField] private Transform _rayStartTransform;
     [SerializeField] private Transform _bulletStartTransform;
     [SerializeField] private Animator _animator;
+    [SerializeField] private ParticleSystem _shootEffect;
+    [SerializeField] private AudioSource _shootAudio;
     private WeaponScriptable _weaponData;
     private int _ammo;
     private Timer _reloadTimer;
@@ -65,6 +67,8 @@ public class Weapon : MonoBehaviour
     private void Shoot()
     {
         _animator?.SetTrigger("Shoot");
+        _shootEffect?.Play();
+        _shootAudio?.Play();
         Ammo -= 1;
         _timerBetweenShots.SetTimer(_weaponData.TimeBeetwenShoot);
         if (_ammo <= 0)
@@ -74,9 +78,12 @@ public class Weapon : MonoBehaviour
     }
     public void ReloadWeapon()
     {
-        _animator?.SetTrigger("Reload");
-        Ammo = 0;
-        _reloadTimer.SetTimer(_weaponData.ReloadTime);
+        if (_ammo < _weaponData.AmmoInStock)
+        {
+            _animator?.SetTrigger("Reload");
+            Ammo = 0;
+            _reloadTimer.SetTimer(_weaponData.ReloadTime);
+        }
     }
     private void CheckCollision()
     {

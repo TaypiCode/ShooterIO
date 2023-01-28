@@ -21,6 +21,7 @@ public class SaveGame : MonoBehaviour
     public void SaveProgress()
     {
         save.playerScore =  GameData.PlayerScore;
+        LeaderboardScript.SetLeaderboardValue(LeaderboardScript.Names.Rating, GameData.PlayerScore);
         PlayerPrefs.SetString("SV", JsonUtility.ToJson(save));
         PlayerPrefs.Save();
     }

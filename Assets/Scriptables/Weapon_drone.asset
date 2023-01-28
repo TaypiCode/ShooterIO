@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e8fdc7fd26d6a304a90acef7c3649052, type: 3}
-  m_Name: Weapon
+  m_Name: Weapon_drone
   m_EditorClassIdentifier: 
   itemId: 5e08eebc-df46-4699-bda6-57fbbbb336fc
   _sprite: {fileID: 0}
-  _name: AK
+  _name: Drone
   _itemLevel: 1
-  _reloadTime: 3.5
-  _timeBeetwenShoot: 0.2
+  _reloadTime: 5
+  _timeBeetwenShoot: 0.5
   _damage: 1
-  _ammoInStock: 30
+  _ammoInStock: 10
