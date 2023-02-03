@@ -11,8 +11,8 @@ public class MainMenu : MonoBehaviour
     {
         _playerScoreText.text = "Рейтинг: " + GameData.PlayerScore;
     }
-    public void StartGame()
+    public void StartGame(int sceneId)
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(sceneId);
     }
 }

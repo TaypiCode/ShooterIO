@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 _moveDirection;
     private bool _haveUIForCloseWhenMove = false;
 
-    private void Start()
+    private void Awake()
     {
         _transform = transform;
     }

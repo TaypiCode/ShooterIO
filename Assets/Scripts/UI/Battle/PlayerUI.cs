@@ -98,7 +98,7 @@ public class PlayerUI : MonoBehaviour
     }
     public void RestartGame()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     public void ToMenu()
     {
