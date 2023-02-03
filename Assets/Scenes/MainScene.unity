@@ -481,7 +481,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df3950abdd1a75b4fb06baca21e568f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _battleTime: 200
+  _battleTime: 240
   _ads: {fileID: 1243248699}
   _playerData: {fileID: 1690144668}
   _playerEvents: {fileID: 1690144667}
