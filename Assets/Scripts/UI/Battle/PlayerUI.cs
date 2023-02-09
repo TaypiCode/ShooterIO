@@ -75,14 +75,14 @@ public class PlayerUI : MonoBehaviour
     {
         if (GameData.GameEnded == false)
         {
-            Cursor.lockState = CursorLockMode.Locked;
-            _playerEvents.UnLockCamera();
+            //Cursor.lockState = CursorLockMode.Locked;
+            //_playerEvents.UnLockCamera();
         }
     }
     private void UnLockCursor()
     {
-        Cursor.lockState = CursorLockMode.None;
-        _playerEvents.LockCamera();
+        //Cursor.lockState = CursorLockMode.None;
+        //_playerEvents.LockCamera();
 
     }
     private void EndGame()

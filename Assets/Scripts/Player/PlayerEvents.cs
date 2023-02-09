@@ -33,25 +33,27 @@ public class PlayerEvents : MonoBehaviour
     }
     private void OnRespawn()
     {
+        UnLockCamera();
     }
     private void OnDead()
     {
+        LockCamera();
         OnRespawnEvent?.Invoke();
     }
     public void LockCamera()
     {
         if (_cameraPOV != null)
         {
-            _cameraPOV.m_HorizontalAxis.m_MaxSpeed = 0;
-            _cameraPOV.m_VerticalAxis.m_MaxSpeed = 0;
+            //_cameraPOV.m_HorizontalAxis.m_MaxSpeed = 0;
+            //_cameraPOV.m_VerticalAxis.m_MaxSpeed = 0;
         }
     }
     public void UnLockCamera()
     {
         if (_cameraPOV != null)
         {
-            _cameraPOV.m_HorizontalAxis.m_MaxSpeed = _cameraXSpeed;
-            _cameraPOV.m_VerticalAxis.m_MaxSpeed = _cameraYSpeed;
+            //_cameraPOV.m_HorizontalAxis.m_MaxSpeed = _cameraXSpeed;
+            //_cameraPOV.m_VerticalAxis.m_MaxSpeed = _cameraYSpeed;
         }
     }
 }
