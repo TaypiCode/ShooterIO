@@ -32,9 +32,12 @@ public class PlayerUI : MonoBehaviour
     }
     private void Update()
     {
+        
         if (_sessionTimer.GetTime() <= 0 && GameData.GameEnded == false)
         {
+            
             EndGame();
+            Cursor.lockState = CursorLockMode.None;
         }
         else
         {
@@ -46,7 +49,7 @@ public class PlayerUI : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                SwitchCursorState();
+               //SwitchCursorState();
             }
             if (Input.GetKeyDown(KeyCode.Tab))
             {
