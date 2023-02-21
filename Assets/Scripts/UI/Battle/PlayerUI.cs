@@ -23,6 +23,8 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _playerAddScoreText;
 
     private Timer _sessionTimer;
+
+    private static int _gamesCount;
     private void Start()
     {
         GameData.GameEnded = false;
@@ -90,6 +92,7 @@ public class PlayerUI : MonoBehaviour
     }
     private void EndGame()
     {
+        _gamesCount++;
         GameData.GameEnded = true;
         _battleLeaderboard.ShowLeaderboard();
         _deathCanvas.SetActive(true);
@@ -97,6 +100,11 @@ public class PlayerUI : MonoBehaviour
         GameData.PlayerScore += score;
         _playerAddScoreText.text = "Вы получаете " + score + " рейтинга за " + _battleLeaderboard.GetPosition(_playerData.Stat) + " место";
         UnLockCursor();
+        if (_gamesCount > 5)
+        {
+            RateUsScript.ShowRateUs();
+            _gamesCount = 0;
+        }
         _ads.ShowNonRewardAd();
     }
     public void RestartGame()
