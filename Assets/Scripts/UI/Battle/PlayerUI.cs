@@ -11,6 +11,7 @@ public class PlayerUI : MonoBehaviour
 {
     [SerializeField] private float _battleTime;
     [SerializeField] private AdsScript _ads;
+    [SerializeField] private SaveGame _save;
     [SerializeField] private PlayerData _playerData;
     [SerializeField] private PlayerEvents _playerEvents;
     [SerializeField] private TextMeshProUGUI _battleTimerText;
@@ -100,6 +101,7 @@ public class PlayerUI : MonoBehaviour
         GameData.PlayerScore += score;
         _playerAddScoreText.text = "Вы получаете " + score + " рейтинга за " + _battleLeaderboard.GetPosition(_playerData.Stat) + " место";
         UnLockCursor();
+        _save.SaveProgress();
         if (_gamesCount > 5)
         {
             RateUsScript.ShowRateUs();
